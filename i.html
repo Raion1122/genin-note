@@ -102,7 +102,7 @@ body.has-guard main{padding-bottom:150px}
 <section class='slide' id='s37'><h3><span class=no>37</span>交通2級検定問題<span class=len>0分08秒</span></h3><audio controls preload=none data-key='i/37' src='audio/i/37.mp3'></audio><div class=txt><p>次の問題です。</p><p>道路交通法の目的として、まちがっているのは、どれでしょう。</p></div></section>
 <section class='slide' id='s38'><h3><span class=no>38</span>交通2級検定問題<span class=len>0分33秒</span></h3><audio controls preload=none data-key='i/38' src='audio/i/38.mp3'></audio><div class=txt><p>選択肢は、5つです。</p><p>1番。貨物自動車の運送事業を発展させて、みんなの幸せにつなげること。</p><p>2番。交通の安全を守ること。</p><p>3番。交通を、スムーズに流すこと。</p><p>4番。道路の交通が原因で起きる、迷惑や障害を防ぐこと。</p><p>5番。道路での危険を防ぐこと。</p><p>まちがっているのは、どれでしょう。</p></div></section>
 <section class='slide' id='s39'><h3><span class=no>39</span>交通2級検定問題<span class=len>0分13秒</span></h3><audio controls preload=none data-key='i/39' src='audio/i/39.mp3'></audio><div class=txt><p>答えは、1番です。</p><p>1番は、貨物自動車運送事業法という、別の法律の目的です。</p><p>道路交通法の目的ではありません。</p></div></section>
-<p class=foot>作成 2026-11-13 21:02 JST ／ 読み上げ原稿とガードさんの声（Microsoft の AI 音声）から自動で作ったページです。</p>
+<p class=foot>作成 2026-11-13 21:04 JST ／ 読み上げ原稿とガードさんの声（Microsoft の AI 音声）から自動で作ったページです。</p>
 </main>
 <img id=guard src='guard/open_closed.png' alt='ガードさん'><script>
 // 「続けて再生」がオンなら、1枚終わったら次の音声を自動で流す
@@ -118,10 +118,12 @@ const pre={};['open','closed'].forEach(e=>['closed','half','open'].forEach(m=>{c
 let tracks={}, cur=null, eyes='open';
 fetch('guard/tracks.json').then(r=>r.json()).then(t=>tracks=t).catch(()=>{});
 const show=m=>{const s=`guard/${eyes}_${m}.png`; if(!g.src.endsWith(s)) g.src=s};
-function tick(){ if(!cur||cur.paused){show('closed');return}
+// 0.1秒ごとのタイマーで切り替える（requestAnimationFrame は裏のタブ等で止まるため使わない）
+let timer=null;
+function tick(){ if(!cur||cur.paused){show('closed');clearInterval(timer);timer=null;return}
   const tr=tracks[cur.dataset.key]||''; const k=Math.floor(cur.currentTime*10);
-  show(tr? (M[tr[k]]||'closed') : (k%3?'half':'open')); requestAnimationFrame(tick) }
-list.forEach(a=>{a.addEventListener('play',()=>{cur=a;requestAnimationFrame(tick)});a.addEventListener('pause',()=>show('closed'));a.addEventListener('ended',()=>show('closed'))});
+  show(tr? (M[tr[k]]||'closed') : (k%3?'half':'open')) }
+list.forEach(a=>{a.addEventListener('play',()=>{cur=a;if(!timer)timer=setInterval(tick,100)});a.addEventListener('pause',()=>show('closed'));a.addEventListener('ended',()=>show('closed'))});
 (function blink(){setTimeout(()=>{eyes='closed';show(g.src.match(/_(\w+)\.png/)[1]);setTimeout(()=>{eyes='open';show(g.src.match(/_(\w+)\.png/)[1]);blink()},150)},2500+Math.random()*2500)})();
 </script>
 </body>
