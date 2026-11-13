@@ -47,7 +47,9 @@ nav.decks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 nav.decks a{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px;color:var(--fg);text-decoration:none;font-size:14px}
 .foot{color:var(--muted);font-size:13px;margin-top:26px}
 /* ガードさん: 右下に固定。下の方の文字が隠れないよう、ページの下に余白を足す */
-#guard{position:fixed;right:max(6px,env(safe-area-inset-right));bottom:max(4px,env(safe-area-inset-bottom));width:96px;height:auto;pointer-events:none;z-index:5;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+/* ふだんは画面の下に隠れていて、音声を流している間だけ出てくる（文字を隠さないため） */
+#guard{position:fixed;right:max(6px,env(safe-area-inset-right));bottom:max(4px,env(safe-area-inset-bottom));width:96px;height:auto;pointer-events:none;z-index:5;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));transform:translateY(130%);transition:transform .35s ease}
+body.playing #guard{transform:none}
 body.has-guard main{padding-bottom:150px}
 .hello{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:14px 0}
 .hello img{width:84px;height:auto;flex:none}
@@ -57,7 +59,7 @@ body.has-guard main{padding-bottom:150px}
 <body>
 <header>
   <h1>現任教育（2号）講義資料の確認</h1>
-  <div class=sub>11/18(水) の講義用・作成 2026-11-13 21:04</div>
+  <div class=sub>11/18(水) の講義用・作成 2026-11-13 21:06</div>
 </header>
 <main>
 <div class=hello><img src='guard/open_closed.png' alt='ガードさん'><p>スライドの読み上げを担当する、警備ロボットの<b>ガードさん</b>です。各コマのページで音声を流すと、右下でぼくが読み上げます。</p></div>
@@ -70,7 +72,7 @@ body.has-guard main{padding-bottom:150px}
 <div class=warn id=chk><b>読み間違いが心配なところ（4 か所）</b>
 <ul><li><a href='i.html#s12'>1コマ目（イ） 12枚目</a>「くうそう距離」</li><li><a href='i.html#s27'>1コマ目（イ） 27枚目</a>「拘禁刑・禁錮」</li><li><a href='ro.html#s10'>2コマ目（ロ） 10枚目</a>「盛り土」</li><li><a href='ha.html#s18'>3コマ目（ハ） 18枚目</a>「境内」</li></ul>
 読み間違いや、直したい言い回しがあれば「〇コマ目の〇枚目をこう読んで」と伝えてください。原稿を直して作り直します。</div>
-<p class=note><b>作成 2026-11-13 21:04 JST</b><br>
+<p class=note><b>作成 2026-11-13 21:06 JST</b><br>
 各コマのページでは、スライドの番号ごとに音声と、読み上げている文字を並べています。音声は本番のパワポに埋め込んだものと同じ、ガードさんの声です。<br>
 スライドの画像と元資料のパワポは載せていません。</p>
 </main>
